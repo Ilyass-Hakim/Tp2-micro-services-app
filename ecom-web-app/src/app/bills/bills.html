@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    Bills
+    @if (customerId()) {
+      <span> of customer {{ customerId() }}</span>
+    }
+  </div>
+  <div class="card-body">
+    @if (errorMessage()) {
+      <div class="alert alert-danger">{{ errorMessage() }}</div>
+    }
+    <table class="table table-striped">
+      <thead>
+        <tr><th>ID</th><th>Date</th><th>Customer ID</th><th></th></tr>
+      </thead>
+      <tbody>
+        @for (b of bills(); track b.id) {
+          <tr>
+            <td>{{ b.id }}</td>
+            <td>{{ b.billingDate | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ b.customerId }}</td>
+            <td><button class="btn btn-sm btn-info" (click)="getBillDetails(b)">Details</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
